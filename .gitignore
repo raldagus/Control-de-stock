@@ -1,0 +1,19 @@
+# Angular / Node
+Front/node_modules/
+Front/dist/
+Front/.angular/
+Front/.vscode/
+
+# .NET
+Back/bin/
+Back/obj/
+Back/.vs/
+Back/*.user
+
+# Entornos
+**/*.env
+**/appsettings.Development.json
+
+# OS
+.DS_Store
+Thumbs.db
