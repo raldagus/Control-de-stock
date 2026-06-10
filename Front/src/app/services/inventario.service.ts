@@ -15,7 +15,7 @@ export interface DashboardData {
 @Injectable({ providedIn: 'root' })
 export class InventarioService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = 'https://localhost:7123/api';
+  private readonly baseUrl = 'https://control-de-stock-ki5e.onrender.com/api';
 
   getDashboard(): Observable<DashboardData> {
     return forkJoin({
