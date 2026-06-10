@@ -47,7 +47,7 @@ builder.Services.AddCors(options =>
     {
         policy.WithOrigins(
             "http://localhost:4200",
-            "https://tu-app.vercel.app"  // esto lo actualizamos cuando deployemos el frontend
+            "https://control-de-stock-4cdg0wgz8-rald-s-projects.vercel.app"
         )
         .AllowAnyHeader()
         .AllowAnyMethod();
@@ -56,9 +56,11 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // ── Middleware ─────────────────────────────────────────────────
-app.UseSwagger();
-app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Stock API v1"));
-
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Stock API v1"));
+}
 app.UseCors("PermitirAngular");
 app.UseHttpsRedirection();
 app.UseAuthorization();
