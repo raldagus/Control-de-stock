@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // ── Base de datos ──────────────────────────────────────────────
 builder.Services.AddDbContext<StockDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("StockDB")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("StockDB")));
 
 // ── Repositorios ───────────────────────────────────────────────
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
@@ -44,11 +44,15 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("PermitirAngular", policy =>
-        policy.WithOrigins("http://localhost:4200")
-              .AllowAnyHeader()
-              .AllowAnyMethod());
+    {
+        policy.WithOrigins(
+            "http://localhost:4200",
+            "https://tu-app.vercel.app"  // esto lo actualizamos cuando deployemos el frontend
+        )
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
 });
-
 var app = builder.Build();
 
 // ── Middleware ─────────────────────────────────────────────────
