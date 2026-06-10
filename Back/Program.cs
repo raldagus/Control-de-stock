@@ -47,7 +47,8 @@ builder.Services.AddCors(options =>
     {
         policy.WithOrigins(
             "http://localhost:4200",
-            "https://control-de-stock-4cdg0wgz8-rald-s-projects.vercel.app"
+            "https://control-de-stock-4cdg0wgz8-rald-s-projects.vercel.app",
+            "https://control-de-stock-omega.vercel.app"
         )
         .AllowAnyHeader()
         .AllowAnyMethod();
