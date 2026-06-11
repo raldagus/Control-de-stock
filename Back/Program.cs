@@ -9,8 +9,12 @@ var builder = WebApplication.CreateBuilder(args);
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 // ── Base de datos ──────────────────────────────────────────────
+var dataSourceBuilder = new Npgsql.NpgsqlDataSourceBuilder(builder.Configuration.GetConnectionString("StockDB"));
+dataSourceBuilder.EnableUnmappedTypes();
+var dataSource = dataSourceBuilder.Build();
+
 builder.Services.AddDbContext<StockDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("StockDB")));
+    options.UseNpgsql(dataSource));
 
 // ── Repositorios ───────────────────────────────────────────────
 builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();

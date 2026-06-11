@@ -8,7 +8,7 @@ public class MovimientoStock
     public int Cantidad { get; set; }
     public decimal PrecioUnitario { get; set; }
     public string? Motivo { get; set; }
-    public DateTime FechaMovimiento { get; set; } = DateTime.Now;
+    public DateTime FechaMovimiento { get; set; } = DateTime.UtcNow;
 
     // Navegación
     public Producto Producto { get; set; } = null!;
