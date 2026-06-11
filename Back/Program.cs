@@ -6,6 +6,7 @@ using StockAPI.Services;
 using StockAPI.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 // ── Base de datos ──────────────────────────────────────────────
 builder.Services.AddDbContext<StockDbContext>(options =>
@@ -46,11 +47,10 @@ builder.Services.AddCors(options =>
     options.AddPolicy("PermitirAngular", policy =>
     {
         policy.WithOrigins(
-            "http://localhost:4200",
-            "https://control-de-stock-4cdg0wgz8-rald-s-projects.vercel.app",
-            "https://control-de-stock-omega.vercel.app"
-        )
-        .AllowAnyHeader()
+           "http://localhost:4200",
+           "https://control-de-stock-omega.vercel.app"
+       )
+       .AllowAnyHeader()
         .AllowAnyMethod();
     });
 });
